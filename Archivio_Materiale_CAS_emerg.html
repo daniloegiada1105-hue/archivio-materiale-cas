@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archivio Materiale CAS</title>
+
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  background: #f4f6f8;
+}
+
+header {
+  background: #004aad;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.section {
+  background: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.section h2 {
+  margin-top: 0;
+  color: #004aad;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+select, input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: #2ecc71;
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>Archivio Materiale CAS</header>
+
+<div class="section">
+  <h2>Nuovo Movimento</h2>
+
+  <label>Utente</label>
+  <select>
+    <option>Antonio</option>
+    <option>Danilo</option>
+  </select>
+
+  <label>Tipo movimento</label>
+  <select>
+    <option>Entrata</option>
+    <option>Uscita</option>
+  </select>
+
+  <label>Materiale</label>
+  <select>
+    <option>CARTELLINE EDIZIONE senza QR</option>
+    <option>CARTELLINE EDIZIONE con QR</option>
+    <option>STRATEGIE (CH) pazienti chirurgici</option>
+    <option>STRATEGIE (CH) pazienti critici</option>
+    <option>STRATEGIE (CH) pazienti gastrointestinali</option>
+    <option>STRATEGIE (CH) pazienti ginecologici</option>
+    <option>Comitati di Assistenza Sanitaria</option>
+    <option>Posizione Etica e Religiosa</option>
+    <option>Strategie cliniche</option>
+    <option>Caring For Patient Who Refuse Blood</option>
+    <option>DVD</option>
+    <option>Biglietti da Visita "Informazioni per i Medici"</option>
+    <option>Manuale Mercker</option>
+    <option>Dossier IV Seminario</option>
+    <option>Dossier Famiglia e Salute</option>
+  </select>
+
+  <label>Deposito</label>
+  <select>
+    <option>Casa</option>
+    <option>Sala</option>
+  </select>
+
+  <label>Quantità</label>
+  <input type="range" min="0" max="100" value="0"
+         oninput="this.nextElementSibling.value=this.value">
+  <output>0</output>
+
+  <button>Salva movimento</button>
+</div>
+
+<div class="section">
+  <h2>Giacenze (live)</h2>
+  <iframe src="https://docs.google.com/spreadsheets/d/1rAgRYyP9IGWYj_FuxFGtmQRoFOF_O8i6urneA9V7nsk/preview?gid=GID_GIACENZE"></iframe>
+</div>
+
+<div class="section">
+  <h2>Storico Movimenti (live)</h2>
+  <iframe src="https://docs.google.com/spreadsheets/d/1rAgRYyP9IGWYj_FuxFGtmQRoFOF_O8i6urneA9V7nsk/preview?gid=1826467994"></iframe>
+</div>
+
+</body>
+</html>
