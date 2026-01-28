@@ -39,7 +39,7 @@ label {
   font-weight: 600;
 }
 
-select {
+select, input {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
@@ -54,6 +54,7 @@ button {
   border: none;
   color: white;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 iframe {
@@ -110,14 +111,16 @@ iframe {
   </select>
 
   <label>Quantità</label>
-  <select id="quantita"></select>
+  <input id="quantita" type="range" min="0" max="100" value="0"
+         oninput="this.nextElementSibling.value=this.value">
+  <output>0</output>
 
-  <button id="salva">Salva movimento</button>
+  <button onclick="salvaMovimento()">Salva movimento</button>
 </div>
 
 <div class="section">
   <h2>Giacenze (live)</h2>
-  <iframe src="https://docs.google.com/spreadsheets/d/1rAgRYyP9IGWYj_FuxFGtmQRoFOF_O8i6urneA9V7nsk/preview?gid=GID_GIACENZE"></iframe>
+  <iframe src="https://docs.google.com/spreadsheets/d/1rAgRYyP9IGWYj_FuxFGtmQRoFOF_O8i6urneA9V7nsk/preview"></iframe>
 </div>
 
 <div class="section">
@@ -126,17 +129,9 @@ iframe {
 </div>
 
 <script>
-/* --- SELECT 0-100 --- */
-const q = document.getElementById("quantita");
-for (let i = 0; i <= 100; i++) {
-  const o = document.createElement("option");
-  o.value = i;
-  o.textContent = i;
-  q.appendChild(o);
-}
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgLwa3Nez1PFvJhm9FFEVsobfRf9XkX0pc3yqK-fnLn4_5RTUwrGtNnjnitUOxbtNT/exec";
 
-/* --- SALVATAGGIO MOVIMENTO --- */
-document.getElementById("salva").addEventListener("click", () => {
+function salvaMovimento() {
 
   const params = new URLSearchParams({
     action: "add",
@@ -147,20 +142,16 @@ document.getElementById("salva").addEventListener("click", () => {
     quantita: document.getElementById("quantita").value
   });
 
-  fetch("INCOLLA_QUI_URL_WEBAPP?" + params.toString())
+  fetch(SCRIPT_URL + "?" + params.toString())
     .then(r => r.json())
     .then(() => {
-      alert("Movimento salvato ✔");
-
-      document.querySelectorAll("iframe").forEach(f => {
-        f.src = f.src;
-      });
+      alert("Movimento salvato ✅");
     })
     .catch(err => {
       alert("Errore nel salvataggio ❌");
       console.error(err);
     });
-});
+}
 </script>
 
 </body>
