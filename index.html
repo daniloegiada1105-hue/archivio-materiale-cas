@@ -39,7 +39,7 @@ label {
   font-weight: 600;
 }
 
-select, input {
+select {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
@@ -73,19 +73,19 @@ iframe {
   <h2>Nuovo Movimento</h2>
 
   <label>Utente</label>
-  <select>
+  <select id="utente">
     <option>Antonio</option>
     <option>Danilo</option>
   </select>
 
   <label>Tipo movimento</label>
-  <select>
+  <select id="tipo">
     <option>Entrata</option>
     <option>Uscita</option>
   </select>
 
   <label>Materiale</label>
-  <select>
+  <select id="materiale">
     <option>CARTELLINE EDIZIONE senza QR</option>
     <option>CARTELLINE EDIZIONE con QR</option>
     <option>STRATEGIE (CH) pazienti chirurgici</option>
@@ -104,17 +104,15 @@ iframe {
   </select>
 
   <label>Deposito</label>
-  <select>
+  <select id="deposito">
     <option>Casa</option>
     <option>Sala</option>
   </select>
 
   <label>Quantità</label>
-  <input type="range" min="0" max="100" value="0"
-         oninput="this.nextElementSibling.value=this.value">
-  <output>0</output>
+  <select id="quantita"></select>
 
-  <button>Salva movimento</button>
+  <button id="salva">Salva movimento</button>
 </div>
 
 <div class="section">
@@ -127,6 +125,43 @@ iframe {
   <iframe src="https://docs.google.com/spreadsheets/d/1rAgRYyP9IGWYj_FuxFGtmQRoFOF_O8i6urneA9V7nsk/preview?gid=1826467994"></iframe>
 </div>
 
-</body>
+<script>
+/* --- SELECT 0-100 --- */
+const q = document.getElementById("quantita");
+for (let i = 0; i <= 100; i++) {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = i;
+  q.appendChild(o);
+}
 
+/* --- SALVATAGGIO MOVIMENTO --- */
+document.getElementById("salva").addEventListener("click", () => {
+
+  const params = new URLSearchParams({
+    action: "add",
+    utente: document.getElementById("utente").value,
+    tipo: document.getElementById("tipo").value,
+    materiale: document.getElementById("materiale").value,
+    deposito: document.getElementById("deposito").value,
+    quantita: document.getElementById("quantita").value
+  });
+
+  fetch("INCOLLA_QUI_URL_WEBAPP?" + params.toString())
+    .then(r => r.json())
+    .then(() => {
+      alert("Movimento salvato ✔");
+
+      document.querySelectorAll("iframe").forEach(f => {
+        f.src = f.src;
+      });
+    })
+    .catch(err => {
+      alert("Errore nel salvataggio ❌");
+      console.error(err);
+    });
+});
+</script>
+
+</body>
 </html>
