@@ -102,6 +102,7 @@ iframe {
     <option>Manuale Mercker</option>
     <option>Dossier IV Seminario</option>
     <option>Dossier Famiglia e Salute</option>
+    <option>Brochure EBM</option>
   </select>
 
   <label>Deposito</label>
@@ -151,7 +152,6 @@ iframe {
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgLwa3Nez1PFvJhm9FFEVsobfRf9XkX0pc3yqK-fnLn4_5RTUwrGtNnjnitUOxbtNT/exec";
 
 function salvaMovimento() {
-
   const params = new URLSearchParams({
     action: "add",
     utente: document.getElementById("utente").value,
